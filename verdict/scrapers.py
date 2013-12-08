@@ -33,4 +33,16 @@ def eight_hundred_notes(q):
     request = urllib2.Request(url, headers={'User-Agent': 
                                             random.choice(browsers).user_agent})
     page = urllib2.urlopen(request).read()
-    print random.choice(browsers).user_agent
+    soup = BeautifulSoup(page)
+    if soup.find(id='treeThread').contents:
+        return True
+    else:
+        return False
+
+scrapers = [eight_hundred_notes,]
+
+def run(q):
+    results = []
+    for func in scrapers:
+        results.append(func(q))
+    return True in results

@@ -20,8 +20,8 @@ class AjaxView(View):
     def json_response(self, **kwargs):
         return HttpResponse(json.dumps(kwargs), content_type="application/json")
 
-    def success(self, message):
-        return self.json_response(result=0, message=message)
+    def success(self, **kwargs):
+        return self.json_response(result=0, **kwargs)
 
     def error(self, error_type, message):
         return self.json_response(result=1, error=error_type, message=message)
@@ -42,5 +42,5 @@ class CheckPhoneNumberView(AjaxView):
             return self.error('ValidationError', 'Field (number) is not 10 '
                                                  'characters long.')
         else:
-            scrapers.eight_hundred_notes(number)
-            return self.success(number)
+            verdict = scrapers.run(number)
+            return self.success(number=number, verdict=verdict)
