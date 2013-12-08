@@ -2,12 +2,8 @@ import random
 import urllib2
 from bs4 import BeautifulSoup
 
-import logging
-
 
 # setup classes/functions
-
-logger = logging.getLogger(__name__)
 
 class Browser(object):
     
@@ -46,29 +42,36 @@ def url_to_soup(url):
 def eight_hundred_notes(q):
     url = "http://800notes.com/Phone.aspx/1-%s-%s-%s" % (q[:3], q[3:6], q[6:])
     soup = url_to_soup(url)
+    result = dict(name='800notes.com', url=url)
     # see if the element with id "treeTread" has any contents
     if soup.find(id='treeThread').contents:
-        return True
+        result['verdict'] = True
     else:
-        return False
+        result['verdict'] = False
+    return result
 
 def who_called_us(q):
     url = "http://whocalled.us/lookup/%s" % q
     soup = url_to_soup(url)
+    result = dict(name='whocalled.us', url=url)
     # look for an element anywhere on the page with id "calls"
     if soup.find(id='calls'):
-        return True
+        result['verdict'] = True
     else:
-        return False
+        result['verdict'] = False
+    return result
 
 def why_call_me(q):
     url = "http://www.whycall.me/%s-%s-%s.html" % (q[:3], q[3:6], q[6:])
     soup = url_to_soup(url)
-    print soup.prettify()
+    result = dict(name='whycall.me', url=url)
+    # look for an element anywhere on the page with id "complaint"
     if soup.find(id='complaint'):
-        return True
+        result['verdict'] = True
     else:
-        return False
+        result['verdict'] = False
+    return result
+
 
 # aggregation
 
@@ -79,4 +82,4 @@ def run(q):
     results = []
     for scraper in scrapers:
         results.append(scraper(q))
-    return True in results
+    return results

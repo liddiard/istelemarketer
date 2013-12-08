@@ -42,5 +42,5 @@ class CheckPhoneNumberView(AjaxView):
             return self.error('ValidationError', 'Field (number) is not 10 '
                                                  'characters long.')
         else:
-            verdict = scrapers.run(number)
-            return self.success(number=number, verdict=verdict)
+            results = scrapers.run(number)
+            return self.success(number=number, results=results)
