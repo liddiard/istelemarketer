@@ -18,8 +18,16 @@ function checkPhoneNumber(event) {
     event.preventDefault();
     var contents = $('form#check input[type=text]').val();
     var number = contents.match(/[0-9]/g).join('');
-    console.log(number);
-    ajaxPost({number: number}, '/api/check/', function(response){ console.log(response) });
+    if (number.length < 10)
+        inputError("Whoops! That number is less than 10 digits.")
+    else
+        ajaxPost({number: number},
+                 '/api/check/',
+                 function(response){ console.log(response) });
+}
+
+function inputError(msg) {
+    $('.input.error').text(msg).stop().css("opacity", "1").fadeTo(10000, 0.6);
 }
 
 /* utility functions */

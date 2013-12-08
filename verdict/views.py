@@ -36,5 +36,8 @@ class CheckPhoneNumberView(AjaxView):
         elif not pattern.match(number):
             return self.error('ValidationError', 'Field (number) contains '
                                               'characters other than numbers.')
+        elif len(number) != 10:
+            return self.error('ValidationError', 'Field (number) is not 10 '
+                                                 'characters long.')
         else:
             return self.success(number)
