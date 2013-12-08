@@ -1,6 +1,8 @@
-import json, re
+import re
+import json
 from django.http import HttpResponse
 from django.views.generic.base import View, TemplateView
+from verdict import scrapers
 
 class FrontPageView(TemplateView):
 
@@ -40,4 +42,5 @@ class CheckPhoneNumberView(AjaxView):
             return self.error('ValidationError', 'Field (number) is not 10 '
                                                  'characters long.')
         else:
+            scrapers.eight_hundred_notes(number)
             return self.success(number)
