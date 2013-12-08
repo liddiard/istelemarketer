@@ -17,7 +17,11 @@ $(document).ready(function(){
 function checkPhoneNumber(event) {
     event.preventDefault();
     var contents = $('form#check input[type=text]').val();
-    var number = contents.match(/[0-9]/g).join('');
+    try {
+        var number = contents.match(/[0-9]/g).join('');
+    } catch (ex) {
+        var number = ""
+    }
     if (number.length < 10)
         inputError("Whoops! That number is less than 10 digits.")
     else
