@@ -1,5 +1,6 @@
+import json, re
+from django.http import HttpResponse
 from django.views.generic.base import View, TemplateView
-
 
 class FrontPageView(TemplateView):
 
@@ -14,8 +15,26 @@ class AjaxView(View):
         else:
             raise Http404
 
+    def json_response(self, **kwargs):
+        return HttpResponse(json.dumps(kwargs), content_type="application/json")
+
+    def success(self, message):
+        return self.json_response(result=0, message=message)
+
+    def error(self, error_type, message):
+        return self.json_response(result=1, error=error_type, message=message)
+
 
 class CheckPhoneNumberView(AjaxView):
     
     def post(self, request):
-        pass
+        number = request.POST.get('number')
+        pattern = re.compile("^[0-9]+$")
+        if number is None:
+            return self.error('KeyError', 'Required key (number) not found in '
+                                          'request.')
+        elif not pattern.match(number):
+            return self.error('ValidationError', 'Field (number) contains '
+                                              'characters other than numbers.')
+        else:
+            return self.success(number)

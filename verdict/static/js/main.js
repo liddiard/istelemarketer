@@ -19,7 +19,7 @@ function checkPhoneNumber(event) {
     var contents = $('form#check input[type=text]').val();
     var number = contents.match(/[0-9]/g).join('');
     console.log(number);
-    ajaxPost({number: number}, '/api/check/', function(){ console.log(response) });
+    ajaxPost({number: number}, '/api/check/', function(response){ console.log(response) });
 }
 
 /* utility functions */
