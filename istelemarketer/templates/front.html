@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>istelemarketer</title>
+    <link rel="icon" href="{{ STATIC_URL }}img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css">
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="{{ STATIC_URL }}js/maskedinput.min.js"></script>
+    <script src="{{ STATIC_URL }}js/main.js"></script>
+</head>
+
+<body>
+    <h1>istelemarketer</h1>
+    <form id="check" method="post" action="{% url 'check' %}">
+        <input type="text" name="phone-number"/>
+        <input type="submit" value="test"/>
+    </form>
+</body>
+
+</html>
