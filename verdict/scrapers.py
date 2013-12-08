@@ -44,7 +44,6 @@ def url_to_soup(url):
 # scrapers
 
 def eight_hundred_notes(q):
-    '''always fails silently: will most likely return False if failing'''
     url = "http://800notes.com/Phone.aspx/1-%s-%s-%s" % (q[:3], q[3:6], q[6:])
     soup = url_to_soup(url)
     # see if the element with id "treeTread" has any contents
@@ -62,9 +61,19 @@ def who_called_us(q):
     else:
         return False
 
+def why_call_me(q):
+    url = "http://www.whycall.me/%s-%s-%s.html" % (q[:3], q[3:6], q[6:])
+    soup = url_to_soup(url)
+    print soup.prettify()
+    if soup.find(id='complaint'):
+        return True
+    else:
+        return False
+
 # aggregation
 
-scrapers = [eight_hundred_notes, who_called_us]
+# scrapers = [why_call_me,]
+scrapers = [eight_hundred_notes, who_called_us, why_call_me]
 
 def run(q):
     results = []
