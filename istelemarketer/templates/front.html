@@ -12,6 +12,25 @@
 </head>
 
 <body>
+    <canvas width="200" height:"200" id="verdict-canvas"></canvas>
+    <script>
+        var canvas = document.getElementById('verdict-canvas');
+        var context = canvas.getContext('2d');
+        var x = canvas.width / 2;
+        var y = canvas.height / 2;
+        var radius = 75;
+        var startAngle = 1 * Math.PI;
+        var endAngle = 4 * Math.PI;
+        var counterClockwise = false;
+
+        context.beginPath();
+        context.arc(x, y, radius, startAngle, endAngle, counterClockwise);
+        context.lineWidth = 2;
+
+        // line color
+        context.strokeStyle = 'black';
+        context.stroke();
+    </script>
     <div id="verdict"></div>
     <div id="banner"></div>
     <form id="check" method="post" action="{% url 'check' %}">
