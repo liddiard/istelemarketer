@@ -27,7 +27,54 @@ function checkPhoneNumber(event) {
     else
         ajaxPost({number: number},
                  '/api/check/',
-                 function(response){ console.log(response) });
+                 showVerdict);
+}
+
+function showVerdict(response) {
+    var results = response.results;
+    var positive_matches = []
+    var negative_matches = []
+    // separate results out into two arrays
+    for (var i = 0; i < results.length; i++) {
+        if (results[i].verdict)
+            positive_matches.push(results[i]);
+        else
+            negative_matches.push(results[i]);
+    }
+    // change display of the page according to the results
+    if (positive_matches.length > 0) { // this is a telemarketer
+        $('body').addClass('bad');
+        $('#verdict').text('Yes');
+        $('#report').html(generateBadExplainerText(positive_matches));
+    }
+    else { // this isn't a telemarketer
+        $('body').addClass('good');
+        $('#verdict').text('No');
+        $('#report').html('No complaints found; this caller probably isn&rsquo;t a telemarketer.')
+    }
+}
+
+function generateBadExplainerText(positive_matches) {
+    // expects length of positive_matches to be greater than zero
+    var nut = "This caller is a telemarketer according to "
+    if (positive_matches.length === 1) {
+        return nut + generateLink(positive_matches[0].url, positive_matches[0].name) + ".";
+    }
+    else if (positive_matches.length === 2) {
+        return nut + generateLink(positive_matches[0].url, positive_matches[0].name) + " and " +
+                     generateLink(positive_matches[1].url, positive_matches[1].name) + "."; 
+    }
+    else {
+        var l = positive_matches.length;
+        for (var i = 0; i < l-1; i++) {
+            nut += generateLink(positive_matches[i].url, positive_matches[i].name) + ", ";
+        }
+        return nut += "and " + generateLink(positive_matches[l-1].url, positive_matches[l-1].name) + ".";
+    }
+}
+
+function generateLink(href, content) {
+    return "<a href='"+href+"'>"+content+"</a>";
 }
 
 function inputError(msg) {
