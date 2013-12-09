@@ -16,11 +16,13 @@ function checkPhoneNumber(event) {
     }
     if (number.length < 10)
         inputError("Whoops! That number is less than 10 digits.")
-    else
+    else {
+        $('.input.error').text('');
         ajaxPost({number: number},
                  '/api/check/',
                  showVerdict);
-        $('input#phone-number').prop('disabled', true);
+        $('input#phone-number').addClass('disabled').prop('disabled', true);
+    }
 }
 
 function showVerdict(response) {
@@ -36,16 +38,18 @@ function showVerdict(response) {
     }
     // change display of the page according to the results
     if (positive_matches.length > 0) { // this is a telemarketer
-        $('body').addClass('bad');
+        $('body').removeClass('good').addClass('bad');
+        $('#banner').attr('src', '../img/banner_invert.png');
         $('#verdict').text('Yes');
         $('#report').html(generateBadExplainerText(positive_matches));
     }
     else { // this isn't a telemarketer
-        $('body').addClass('good');
+        $('body').removeClass('bad').addClass('good');
+        $('#banner').attr('src', '../img/invert.png');
         $('#verdict').text('No');
         $('#report').html('No complaints found; this caller probably isn&rsquo;t a telemarketer.')
     }
-    $('input#phone-number').prop('disabled', false);
+    $('input#phone-number').removeClass('disabled').prop('disabled', false);
 }
 
 function generateBadExplainerText(positive_matches) {

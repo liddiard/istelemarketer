@@ -1,0 +1,84 @@
+$bad_color: #f00;
+$good_color: #0f0;
+
+@mixin input-placeholder($color) {
+    ::-webkit-input-placeholder {
+        color: $color;
+    }
+
+    :-moz-placeholder { /* Firefox 18- */
+        color: $color;
+    }
+
+    ::-moz-placeholder {  /* Firefox 19+ */
+        color: $color;
+    }
+
+    :-ms-input-placeholder {
+        color: $color;
+    }
+}
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-align: center;
+    border: 0;
+    padding: 0;
+    margin: 0;
+
+    &.good {
+        background-color: $good_color;
+        @include input-placeholder($good_color - #888);
+    }
+
+    &.bad {
+        color: white;
+        background-color: $bad_color;
+        @include input-placeholder($bad_color + #888);
+
+        #banner {
+            background-image: url(../img/banner_invert.png);
+        }
+    }
+}
+
+a {
+    color: inherit;
+}
+
+input {
+    color: inherit;
+    border: 0;
+    background-color: transparent;
+    outline: none;
+    text-align: center;
+
+    &#phone-number {
+        font-size: 5em;
+        width: 100%;
+    }
+
+    &.disabled {
+        opacity: 0.7;
+    }
+}
+
+#banner {
+    height: 100px;
+    background: url(../img/banner.png) no-repeat center;
+    margin-bottom: 0.25em;
+}
+
+#report {
+    margin-top: 0.5em;
+}
+
+span.input.error {
+    display: block;
+    margin-top: 0.5em;
+}
+
+footer {
+    font-size: 0.6em;
+    margin-top: 2em;
+}
