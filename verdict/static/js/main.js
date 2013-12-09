@@ -39,13 +39,11 @@ function showVerdict(response) {
     // change display of the page according to the results
     if (positive_matches.length > 0) { // this is a telemarketer
         $('body').removeClass('good').addClass('bad');
-        $('#banner').attr('src', '../img/banner_invert.png');
         $('#verdict').text('Yes');
         $('#report').html(generateBadExplainerText(positive_matches));
     }
     else { // this isn't a telemarketer
         $('body').removeClass('bad').addClass('good');
-        $('#banner').attr('src', '../img/invert.png');
         $('#verdict').text('No');
         $('#report').html('No complaints found; this caller probably isn&rsquo;t a telemarketer.')
     }
