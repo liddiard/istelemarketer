@@ -1,17 +1,9 @@
 $(document).ready(function(){
-
-    var check_input = $('form#check input[type=text]');
-    var check_submit = $('form#check input[type=submit]');
-
-    check_submit.click(function(event){
-        checkPhoneNumber(event);
-    });
-    check_submit.keypress(function(event){
+    $('input#phone-number').keypress(function(event){
         if (event.which == 13) // if the ENTER key is pressed
             checkPhoneNumber(event);
     });
-
-    check_input.mask("(999) 999-9999").focus();
+    $('input#phone-number').mask("(999) 999-9999").focus();
 });
 
 function checkPhoneNumber(event) {
@@ -28,6 +20,7 @@ function checkPhoneNumber(event) {
         ajaxPost({number: number},
                  '/api/check/',
                  showVerdict);
+        $('input#phone-number').prop('disabled', true);
 }
 
 function showVerdict(response) {
@@ -52,6 +45,7 @@ function showVerdict(response) {
         $('#verdict').text('No');
         $('#report').html('No complaints found; this caller probably isn&rsquo;t a telemarketer.')
     }
+    $('input#phone-number').prop('disabled', false);
 }
 
 function generateBadExplainerText(positive_matches) {
