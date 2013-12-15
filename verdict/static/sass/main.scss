@@ -24,7 +24,7 @@ body {
     text-align: center;
     border: 0;
     padding: 0;
-    margin: 25px 0 0 0;
+    margin: 50px 0 0 0;
 
     &.good {
         background-color: $good_color;
@@ -74,7 +74,7 @@ input {
 #verdict {
     width: 160px; height: 160px;
     background: no-repeat center;
-    margin: -164px auto 0 auto;
+    margin: -164px auto 14px auto;
     text-transform: uppercase;
     font-family: 'Alegreya Sans SC', sans-serif;
     font-size: 5em;
@@ -87,6 +87,7 @@ input {
     span {
         display: table-cell;
         vertical-align: middle;
+        width: inherit;
     }
 }
 
@@ -106,6 +107,9 @@ span.input.error {
 }
 
 footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    margin-bottom: 1em;
     font-size: 0.6em;
-    margin-top: 2em;
 }

@@ -3,7 +3,7 @@ body {
   text-align: center;
   border: 0;
   padding: 0;
-  margin: 25px 0 0 0; }
+  margin: 50px 0 0 0; }
   body.good {
     background-color: lime; }
     body.good ::-webkit-input-placeholder {
@@ -55,7 +55,7 @@ input {
   width: 160px;
   height: 160px;
   background: no-repeat center;
-  margin: -164px auto 0 auto;
+  margin: -164px auto 14px auto;
   text-transform: uppercase;
   font-family: 'Alegreya Sans SC', sans-serif;
   font-size: 5em;
@@ -64,7 +64,8 @@ input {
     background-image: url(../img/spinner_default.gif); }
   #verdict span {
     display: table-cell;
-    vertical-align: middle; }
+    vertical-align: middle;
+    width: inherit; }
 
 #banner {
   height: 100px;
@@ -79,5 +80,8 @@ span.input.error {
   margin-top: 0.5em; }
 
 footer {
-  font-size: 0.6em;
-  margin-top: 2em; }
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  margin-bottom: 1em;
+  font-size: 0.6em; }
