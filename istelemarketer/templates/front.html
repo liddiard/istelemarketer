@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>istelemarketer</title>
+    <meta name="description" content="Search multiple telemarketer databases at once for a quick yes-or-no verdict.">
+    <title>istelemarketer: should you pick up the phone?</title>
     <link rel="icon" href="{{ STATIC_URL }}img/favicon.ico">
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css">
     <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:300' rel='stylesheet' type='text/css'>
@@ -14,6 +15,7 @@
 
 <body>
     <div id="banner"></div>
+    <div id="explainer">Check a number, get a quick answer.</div>
     <form id="check" method="post" action="{% url 'check' %}">
         <input id="phone-number" type="text" name="phone-number" placeholder="(___) ___-____" autocomplete="off"/>
         <!--<input type="submit" value="test"/>-->
