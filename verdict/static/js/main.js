@@ -22,6 +22,10 @@ function checkPhoneNumber(event) {
                  '/api/check/',
                  showVerdict);
         $('input#phone-number').addClass('disabled').prop('disabled', true);
+        $('#verdict > span').text('');
+        $('#verdict').addClass('loading');
+        if (!window.circle)
+            drawVerdictCircle('black');
     }
 }
 
@@ -37,14 +41,19 @@ function showVerdict(response) {
             negative_matches.push(results[i]);
     }
     // change display of the page according to the results
+    $('#verdict').removeClass('loading');
     if (positive_matches.length > 0) { // this is a telemarketer
         $('body').removeClass('good').addClass('bad');
-        $('#verdict').text('Yes');
+        canvas.clear();
+        drawVerdictCircle('white');
+        $('#verdict > span').text('Yes');
         $('#report').html(generateBadExplainerText(positive_matches));
     }
     else { // this isn't a telemarketer
         $('body').removeClass('bad').addClass('good');
-        $('#verdict').text('No');
+        canvas.clear();
+        drawVerdictCircle('black');
+        $('#verdict > span').text('No');
         $('#report').html('No complaints found; this caller probably isn&rsquo;t a telemarketer.')
     }
     $('input#phone-number').removeClass('disabled').prop('disabled', false);
@@ -74,7 +83,34 @@ function generateLink(href, content) {
 }
 
 function inputError(msg) {
-    $('.input.error').text(msg).stop().css("opacity", "1").fadeTo(10000, 0.6);
+    $('.input.error').text(msg).stop().css('opacity', '1').fadeTo(10000, 0.6);
+}
+
+function drawVerdictCircle(color) {
+    window.canvas = document.getElementById('verdict-canvas');
+    window.context = canvas.getContext('2d');
+    var x = canvas.width / 2;
+    var y = canvas.height / 2;
+    var radius = 79;
+    var startAngle = 1 * Math.PI;
+    var endAngle = 4 * Math.PI;
+    var counterClockwise = false;
+
+    context.beginPath();
+    context.arc(x, y, radius, startAngle, endAngle, counterClockwise);
+    context.lineWidth = 2;
+
+    // line color
+    context.strokeStyle = color;
+    context.stroke();
+
+    canvas.clear = function(){
+        context.save();
+        context.setTransform(1,0,0,1,0,0);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.restore();
+    }
+    window.circle = true;
 }
 
 /* utility functions */

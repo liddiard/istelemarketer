@@ -24,17 +24,25 @@ body {
     text-align: center;
     border: 0;
     padding: 0;
-    margin: 0;
+    margin: 25px 0 0 0;
 
     &.good {
         background-color: $good_color;
         @include input-placeholder($good_color - #888);
+
+        #verdict.loading {
+            background-image: url(../img/spinner_good.gif);
+        }
     }
 
     &.bad {
         color: white;
         background-color: $bad_color;
         @include input-placeholder($bad_color + #888);
+
+        #verdict.loading {
+            background-image: url(../img/spinner_bad.gif);
+        }
 
         #banner {
             background-image: url(../img/banner_invert.png);
@@ -60,6 +68,25 @@ input {
 
     &.disabled {
         opacity: 0.7;
+    }
+}
+
+#verdict {
+    width: 160px; height: 160px;
+    background: no-repeat center;
+    margin: -164px auto 0 auto;
+    text-transform: uppercase;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    font-size: 5em;
+    display: table;
+
+    &.loading {
+        background-image: url(../img/spinner_default.gif);
+    }
+
+    span {
+        display: table-cell;
+        vertical-align: middle;
     }
 }
 

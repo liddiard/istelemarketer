@@ -6,32 +6,15 @@
     <title>istelemarketer</title>
     <link rel="icon" href="{{ STATIC_URL }}img/favicon.ico">
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css">
+    <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:300' rel='stylesheet' type='text/css'>
     <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="{{ STATIC_URL }}js/maskedinput.min.js"></script>
     <script src="{{ STATIC_URL }}js/main.js"></script>
 </head>
 
 <body>
-    <canvas width="200" height:"200" id="verdict-canvas"></canvas>
-    <script>
-        var canvas = document.getElementById('verdict-canvas');
-        var context = canvas.getContext('2d');
-        var x = canvas.width / 2;
-        var y = canvas.height / 2;
-        var radius = 75;
-        var startAngle = 1 * Math.PI;
-        var endAngle = 4 * Math.PI;
-        var counterClockwise = false;
-
-        context.beginPath();
-        context.arc(x, y, radius, startAngle, endAngle, counterClockwise);
-        context.lineWidth = 2;
-
-        // line color
-        context.strokeStyle = 'black';
-        context.stroke();
-    </script>
-    <div id="verdict"></div>
+    <canvas width="160" height="160" id="verdict-canvas"></canvas>
+    <div id="verdict"><span></span></div>
     <div id="banner"></div>
     <form id="check" method="post" action="{% url 'check' %}">
         <input id="phone-number" type="text" name="phone-number" placeholder="(___) ___-____" autocomplete="off"/>
