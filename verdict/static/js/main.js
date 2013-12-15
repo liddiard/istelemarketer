@@ -23,6 +23,7 @@ function checkPhoneNumber(event) {
                  showVerdict);
         $('input#phone-number').addClass('disabled').prop('disabled', true);
         $('#verdict > span').text('');
+        $('#report').text('');
         $('#verdict').addClass('loading');
         if (!window.circle)
             drawVerdictCircle('black');
