@@ -30,9 +30,15 @@ browsers = [
                         "Chrome/31.0.1650.57 Safari/537.36")),
 ] # from http://techblog.willshouse.com/2012/01/03/most-common-user-agents/
 
+
 def url_to_soup(url):
-    request = urllib2.Request(url, headers={'User-Agent': 
-                                            random.choice(browsers).user_agent})
+    header = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+              'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+              'Accept-Encoding': 'none',
+              'Accept-Language': 'en-US,en;q=0.8',
+              'Connection': 'keep-alive'}
+    header['User-Agent'] = random.choice(browsers).user_agent 
+    request = urllib2.Request(url, headers=header)
     page = urllib2.urlopen(request).read()
     return BeautifulSoup(page)
 
