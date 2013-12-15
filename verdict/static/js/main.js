@@ -140,7 +140,7 @@ function ajaxPost(params, endpoint, callback_success) {
         data: params,
         success: callback_success,
         error: function(xhr, textStatus, errorThrown) {
-            alert("Oh no! Something went wrong. Please report this error: \n"+errorThrown+xhr.status+xhr.responseText);
+            console.log("Oh no! Something went wrong. Please report this error: \n"+errorThrown+xhr.status+xhr.responseText);
         }
     }); 
 }
