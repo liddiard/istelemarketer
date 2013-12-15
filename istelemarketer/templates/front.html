@@ -16,7 +16,7 @@
 <body>
     <div id="banner"></div>
     <div id="explainer">Check a number, get a quick answer.</div>
-    <form id="check" method="post" action="{% url 'check' %}">
+    <form id="check" method="post" action="{% url 'check' %}">{% csrf_token %}
         <input id="phone-number" type="text" name="phone-number" placeholder="(___) ___-____" autocomplete="off"/>
         <!--<input type="submit" value="test"/>-->
         <span class="input error"></span>
