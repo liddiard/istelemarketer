@@ -1,1 +1,1 @@
-web: python manage.py runserver 0.0.0.0:$PORT --noreload --settings=istelemarketer.settings.base
+web: bin/proximo python manage.py runserver 0.0.0.0:$PORT --noreload --settings=istelemarketer.settings.base
