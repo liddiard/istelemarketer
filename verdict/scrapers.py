@@ -31,10 +31,11 @@ browsers = [
                         "Chrome/31.0.1650.57 Safari/537.36")),
 ] # from http://techblog.willshouse.com/2012/01/03/most-common-user-agents/
 
-proxy  = urllib2.ProxyHandler({'http': os.environ['PROXIMO_URL']})
-auth   = urllib2.HTTPBasicAuthHandler()
-opener = urllib2.build_opener(proxy, auth, urllib2.HTTPHandler)
-urllib2.install_opener(opener)
+if os.environ.get('PROXIMO_URL', '') != '':
+    proxy  = urllib2.ProxyHandler({'http': os.environ.get('PROXIMO_URL', '')})
+    auth   = urllib2.HTTPBasicAuthHandler()
+    opener = urllib2.build_opener(proxy, auth, urllib2.HTTPHandler)
+    urllib2.install_opener(opener)
 
 def url_to_soup(url):
     header = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -51,6 +52,7 @@ def url_to_soup(url):
 # scrapers
 
 def eight_hundred_notes(q):
+    return urllib2.urlopen("http://ipchicken.com/").read()
     url = "http://800notes.com/Phone.aspx/1-%s-%s-%s" % (q[:3], q[3:6], q[6:])
     soup = url_to_soup(url)
     result = dict(name='800notes.com', url=url)
