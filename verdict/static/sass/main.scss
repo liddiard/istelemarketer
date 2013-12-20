@@ -71,6 +71,16 @@ input {
     }
 }
 
+#banner {
+    height: 100px;
+    background: url(../img/banner.png) no-repeat center;
+    margin-bottom: 0.5em;
+}
+
+#explainer {
+    margin-bottom: 0.5em;
+}
+
 #verdict {
     width: 160px; height: 160px;
     background: no-repeat center;
@@ -89,12 +99,6 @@ input {
         vertical-align: middle;
         width: inherit;
     }
-}
-
-#banner {
-    height: 100px;
-    background: url(../img/banner.png) no-repeat center;
-    margin-bottom: 0.5em;
 }
 
 #report {

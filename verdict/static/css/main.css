@@ -51,6 +51,14 @@ input {
   input.disabled {
     opacity: 0.53; }
 
+#banner {
+  height: 100px;
+  background: url(../img/banner.png) no-repeat center;
+  margin-bottom: 0.5em; }
+
+#explainer {
+  margin-bottom: 0.5em; }
+
 #verdict {
   width: 160px;
   height: 160px;
@@ -66,11 +74,6 @@ input {
     display: table-cell;
     vertical-align: middle;
     width: inherit; }
-
-#banner {
-  height: 100px;
-  background: url(../img/banner.png) no-repeat center;
-  margin-bottom: 0.5em; }
 
 #report {
   margin-top: 1em; }
