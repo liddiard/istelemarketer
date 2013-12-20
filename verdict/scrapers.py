@@ -30,6 +30,11 @@ browsers = [
                         "Chrome/31.0.1650.57 Safari/537.36")),
 ] # from http://techblog.willshouse.com/2012/01/03/most-common-user-agents/
 
+if os.environ.get('PROXIMO_URL', '') != '':
+    proxy  = urllib2.ProxyHandler({'http': os.environ.get('PROXIMO_URL', '')})
+    auth   = urllib2.HTTPBasicAuthHandler()
+    opener = urllib2.build_opener(proxy, auth, urllib2.HTTPHandler)
+    urllib2.install_opener(opener)
 
 def url_to_soup(url):
     header = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
