@@ -45,9 +45,12 @@ def url_to_soup(url):
 # scrapers
 
 def eight_hundred_notes(q):
-    url = "https://www.google.com/search?q=1-%s-%s-%s+site:800notes.com&cad=h" % (q[:3], q[3:6], q[6:])
+    url = "https://www.google.com/search?q=1-%s-%s-%s+site:800notes.com&cad=h" \
+                                                       % (q[:3], q[3:6], q[6:])
     soup = url_to_soup(url)
-    result = dict(name='800notes.com', url=url)
+    result = dict(name='800notes.com', 
+                  url="http://800notes.com/Phone.aspx/1-%s-%s-%s" \
+                      % (q[:3], q[3:6], q[6:]))
     # see if the ol under element with id search contains any li's
     if soup.find(id='search').ol.li:
         result['verdict'] = True
