@@ -1,5 +1,5 @@
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: center;
   border: 0;
   padding: 0;
@@ -40,6 +40,7 @@ a {
   color: inherit; }
 
 input {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: inherit;
   border: 0;
   background-color: transparent;
