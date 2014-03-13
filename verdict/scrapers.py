@@ -53,7 +53,9 @@ def eight_hundred_notes(q):
     response = urllib2.urlopen(url).read()
     data = json.loads(response)['responseData']
     search_results = data['results']
-    result = dict(name='800notes.com', url=url)
+    result = dict(name='800notes.com', 
+                  url="http://800notes.com/Phone.aspx/1-%s-%s-%s" \
+                      % (q[:3], q[3:6], q[6:]))
     if len(search_results) > 0:
         result['verdict'] = True
     else:
