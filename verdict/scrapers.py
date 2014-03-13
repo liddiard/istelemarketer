@@ -47,7 +47,7 @@ def url_to_soup(url):
 # scrapers
 
 def eight_hundred_notes(q):
-    querystring = "1-%s-%s-%s site:800notes.com" % (q[:3], q[3:6], q[6:])
+    querystring = "%s-%s-%s site:800notes.com" % (q[:3], q[3:6], q[6:])
     query = urllib.urlencode({'q': querystring})
     url = 'http://ajax.googleapis.com/ajax/services/search/web?v=1.0&%s' % query
     response = urllib2.urlopen(url).read()
