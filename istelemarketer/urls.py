@@ -1,11 +1,11 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 
 from verdict import views
 
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = [
     # Examples:
     # url(r'^$', 'istelemarketer.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
@@ -14,4 +14,4 @@ urlpatterns = patterns('',
     url(r'^api/check/$', views.CheckPhoneNumberView.as_view(), name='check'),
 
     # url(r'^admin/', include(admin.site.urls)),
-)
+]
