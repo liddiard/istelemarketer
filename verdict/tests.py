@@ -24,7 +24,7 @@ class WhoCalledUsTestCase(TestCase):
 
     def setUp(self):
         self.good_numbers = ['4802053588', '3102674357', '3108259898']
-        self.bad_numbers = ['2154293524', '213223126', '9540826973']
+        self.bad_numbers = ['3179373100', '8553360212', '3102451073']
 
     def test_verdict(self):
         '''numbers are correctly identified as telemarketers or not'''
