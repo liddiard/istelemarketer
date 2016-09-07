@@ -104,3 +104,10 @@ TEMPLATES = [
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = S3_URL
+
+# This browser key is OK to be public; it is read-only
+GOOGLE_BROWSER_KEY = 'AIzaSyCnYln-aTLWEq-Rhqpxh-uObGRKDfwNknE'
+
+# custom search engine ID for the 800notes.com search engine.
+# obtained from https://cse.google.com/cse/all > list item > public URL
+EIGHT_HUNDRED_NOTES_CSE = '011750910643523342708:qmix5o1msm0'

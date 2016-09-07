@@ -4,6 +4,8 @@ import urllib
 import urllib2
 from bs4 import BeautifulSoup
 
+from django.conf import settings
+
 
 # setup classes/functions
 
@@ -41,25 +43,26 @@ def url_to_soup(url):
     header['User-Agent'] = random.choice(browsers).user_agent 
     request = urllib2.Request(url, headers=header)
     page = urllib2.urlopen(request).read()
-    return BeautifulSoup(page)
+    return BeautifulSoup(page, 'html.parser')
 
 
 # scrapers
 
 def eight_hundred_notes(q):
     querystring = "%s-%s-%s site:800notes.com" % (q[:3], q[3:6], q[6:])
-    query = urllib.urlencode({'q': querystring})
-    url = 'http://ajax.googleapis.com/ajax/services/search/web?v=1.0&%s' % query
+    query = urllib.urlencode({
+        'key': settings.GOOGLE_BROWSER_KEY,
+        'cx': settings.EIGHT_HUNDRED_NOTES_CSE,
+        'q': querystring
+    })
+    url = 'https://www.googleapis.com/customsearch/v1?%s' % query
     response = urllib2.urlopen(url).read()
-    data = json.loads(response)['responseData']
-    search_results = data['results']
+    data = json.loads(response)
+    num_results = int(data['searchInformation']['totalResults'])
     result = dict(name='800notes.com', 
                   url="http://800notes.com/Phone.aspx/1-%s-%s-%s" \
                       % (q[:3], q[3:6], q[6:]))
-    if len(search_results) > 0:
-        result['verdict'] = True
-    else:
-        result['verdict'] = False
+    result['verdict'] = bool(num_results)
     return result
 
 def who_called_us(q):
@@ -67,7 +70,7 @@ def who_called_us(q):
     soup = url_to_soup(url)
     result = dict(name='whocalled.us', url=url)
     # look for an element anywhere on the page with id "calls"
-    if soup.find(id='calls'):
+    if soup.find(class_='note'):
         result['verdict'] = True
     else:
         result['verdict'] = False
@@ -78,7 +81,7 @@ def why_call_me(q):
     soup = url_to_soup(url)
     result = dict(name='whycall.me', url=url)
     # look for an element anywhere on the page with id "complaint"
-    if soup.find(id='complaint'):
+    if soup.find(class_='description'):
         result['verdict'] = True
     else:
         result['verdict'] = False
