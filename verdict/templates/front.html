@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 
@@ -5,12 +7,12 @@
     <meta charset="UTF-8">
     <meta name="description" content="Search multiple telemarketer databases at once for a quick yes-or-no verdict.">
     <title>istelemarketer: should you pick up the phone?</title>
-    <link rel="icon" href="{{ STATIC_URL }}img/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:300' rel='stylesheet' type='text/css'>
     <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="{{ STATIC_URL }}js/maskedinput.min.js"></script>
-    <script src="{{ STATIC_URL }}js/main.js"></script>
+    <script src="{% static 'js/maskedinput.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 </head>
 
 <body>
